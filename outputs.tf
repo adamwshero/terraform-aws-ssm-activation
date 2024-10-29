@@ -1,38 +1,15 @@
-output "kms_key_arn" {
-  description = "Arn of the Customer Managed Key (CMK)"
-  value       = var.is_enabled ? aws_kms_key.this[0].arn : "[INFO] KMS Key Not Enabled: No Output."
-}
-
-output "kms_key_id" {
-  description = "Id of the Customer Managed Key (CMK)"
-  value       = var.is_enabled ? aws_kms_key.this[0].key_id : "[INFO] KMS Key Not Enabled: No Output."
-}
-
-output "replica_kms_key_arn" {
-  description = "The Amazon Resource Name (ARN) of the replica key. The key ARNs of related multi-Region keys differ only in the Region value."
-  value       = var.replica_is_enabled ? aws_kms_replica_key.this[0].arn : "[INFO] Replica KMS Key Not Enabled: No Output."
-}
-
-output "replica_kms_key_id" {
-  description = "The key ID of the replica key. Related multi-Region keys have the same key ID."
-  value       = var.replica_is_enabled ? aws_kms_replica_key.this[0].arn : "[INFO] Replica KMS Key Not Enabled: No Output."
-}
-output "primary_kms_sops_file" {
-  description = "Output of the newly created KMS SOPS file."
-  value       = var.enable_sops_primary ? local_file.sops_primary[0].content : "[INFO] Primary SOPS Not Enabled: No Output."
-}
-
-output "replica_kms_sops_file" {
-  description = "Output of the newly created KMS SOPS file."
-  value       = var.enable_sops_replica ? local_file.sops_replica[0].content : "[INFO] Replica SOPS Not Enabled: No Output."
-}
-
-output "kms_grant_id" {
-  description = "Id of the Customer Managed Key (CMK) grant."
-  value       = var.grant_is_enabled ? aws_kms_grant.this[0].grant_id : "[INFO] KMS Grant Not Enabled: No Output."
-}
-
-output "kms_grant_token" {
-  description = "Token of the Customer Managed Key (CMK) grant."
-  value       = var.grant_is_enabled ? "[SENSIIVE] Grant token can be retrieved from the state file :-) ." : "[INFO] KMS Grant Not Enabled: No Output."
+output "ssm_activations" {
+  description = "List of SSM activations that have been created."
+  value = tomap({
+    for k, ssm_activations in aws_ssm_activation.this : k => {
+      ssm_activation_id                 = ssm_activations.id
+      ssm_activation_name               = ssm_activations.name
+      ssm_activation_code               = ssm_activations.activation_code
+      ssm_activation_expired            = ssm_activations.expired
+      ssm_activation_expiration_date    = ssm_activations.expiration_date
+      ssm_activation_iam_role           = ssm_activations.iam_role
+      ssm_activation_registration_limit = ssm_activations.registration_limit
+      ssm_activation_registration_count = ssm_activations.registration_count
+    }
+  })
 }
