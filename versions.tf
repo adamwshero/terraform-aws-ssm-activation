@@ -7,9 +7,9 @@ terraform {
       version = ">= 4.30.0"
     }
     # Uncomment this lines below to generate the docs with the requirement
-    terragrunt = {
-      source  = "gruntworks/terragrunt"
-      version = ">= 0.28.0"
-    }
+    # terragrunt = {
+    #   source  = "gruntworks/terragrunt"
+    #   version = ">= 0.28.0"
+    # }
   }
 }
