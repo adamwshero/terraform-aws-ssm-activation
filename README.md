@@ -10,9 +10,18 @@
 <br>
 # terraform-aws-ssm-activations
 
-Terraform module to create an Amazon SSM Activation with an optional IAM role.
+Terraform module to create an Amazon SSM Hybrid Activation using an existing or new IAM role.
 
-[Amazon Systems Manager (SSM)](https://aws.amazon.com/systems-manager/) makes it easy for you to create and manage cryptographic keys and control their use across a wide range of AWS services and in your applications. AWS KMS is a secure and resilient service that uses hardware security modules that have been validated under FIPS 140-2, or are in the process of being validated, to protect your keys. AWS KMS is integrated with AWS CloudTrail to provide you with logs of all key usage to help meet your regulatory and compliance needs.
+[Amazon Systems Manager (SSM) Hybrid Activations](https://aws.amazon.com/systems-manager/) To configure non-EC2 machines for use with AWS Systems Manager in a hybrid and multicloud environment, you create a hybrid activation. Non-EC2 machine types supported as managed nodes include the following:
+
+  - Servers on your own premises (on-premises servers)
+  - AWS IoT Greengrass core devices
+  - AWS IoT and non-AWS edge devices
+  - Virtual machines (VMs), including VMs in other cloud environments
+
+When you run the [create-activation](https://docs.aws.amazon.com/cli/latest/reference/ssm/create-activation.html) command to start a hybrid activation process, you receive an activation code and ID in the command response. You then include the activation code and ID with the command to install SSM Agent on the machine, as described in step 3 of [Managing servers in hybrid and multicloud environments with Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html). This activation process applies to all non-EC2 machine types except AWS IoT Greengrass core devices. For information about configuring AWS IoT Greengrass core devices for Systems Manager, see [Managing edge devices with Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-edge-devices.html).
+
+[Read more about SSM Hybrid Activations](https://docs.aws.amazon.com/systems-manager/latest/userguide/activations.html)
 <br>
 
 ## Module Capabilities
